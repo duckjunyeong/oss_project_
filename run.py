@@ -63,7 +63,7 @@ def tick():
             ball.rect.centerx = paddle.rect.centerx
             ball.rect.bottom = paddle.rect.top
 
-        ball.collide_block(BLOCKS)
+        ball.collide_block(BLOCKS, ITEMS)
         ball.collide_paddle(paddle)
         ball.hit_wall()
         if ball.alive() == False:
@@ -116,6 +116,11 @@ def main():
                 ball.draw(surface)
             for block in BLOCKS:
                 block.draw(surface)
+                
+            for item in ITEMS:
+                item.move()
+                item.draw(surface)
+                
 
         pygame.display.update()
         fps_clock.tick(config.fps)
