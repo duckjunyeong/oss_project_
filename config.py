@@ -21,7 +21,9 @@ display_dimension = (600, 800)
 
 center_x = display_dimension[0] / 2
 center_y = display_dimension[1] / 2
-
+red_color = (242, 0, 0)
+blue_color = (0, 0, 242)
+item_speed = 10
 
 # Setting for paddle
 paddle_color = (242, 242, 0)

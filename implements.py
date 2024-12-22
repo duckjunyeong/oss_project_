@@ -35,9 +35,18 @@ class Block(Basic):
     def draw(self, surface) -> None:
         pygame.draw.rect(surface, self.color, self.rect)
     
-    def collide(self, blocks): 
+    def collide(self, blocks, items): 
         self.alive = False;
         blocks.remove(self);
+
+        if random.random() < 0.2:
+            item_pos_x = random.randint(0,config.display_dimension[0])
+            item_pos_y = 10
+            item_color = config.red_color
+            if (random.random() < 0.5):
+                item_color = config.blue_color
+            
+            items.append(Item(item_color, (item_pos_x, item_pos_y)))
 
 class Paddle(Basic):
     def __init__(self):
@@ -65,14 +74,14 @@ class Ball(Basic):
     def draw(self, surface):
         pygame.draw.ellipse(surface, self.color, self.rect)
 
-    def collide_block(self, blocks: list):
+    def collide_block(self, blocks: list, items: list):
          for block in blocks:
             if self.rect.colliderect(block.rect):
                 if (self.rect.centerx >= block.rect.right | self.rect.centerx <= block.rect.left):
                     self.dir = 180 - self.dir + random.randint(-5, 5)
                 else:
                     self.dir = -self.dir + random.randint(-5, 5)
-                block.collide(blocks)
+                block.collide(blocks, items)
 
 
     def collide_paddle(self, paddle: Paddle) -> None:
@@ -92,3 +101,11 @@ class Ball(Basic):
        if self.rect.bottom >= 790:
             return False
        return True
+
+
+class Item(Basic):
+    def __init__(self, color: tuple, pos: tuple):
+        super().__init__(color, config.item_speed, pos, config.item_size)
+
+    def draw(self, surface):
+        pygame.draw.ellipse(surface, self.color, self.rect)
