@@ -116,7 +116,6 @@ def main():
                 ball.draw(surface)
             for block in BLOCKS:
                 block.draw(surface)
-                
             for item in ITEMS:
                 item.move()
                 item.draw(surface)
