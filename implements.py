@@ -39,7 +39,7 @@ class Block(Basic):
         self.alive = False;
         blocks.remove(self);
 
-        if random.random() < 0.9:
+        if random.random() < 0.2:
             item_pos_x = random.randint(0,config.display_dimension[0])
             item_pos_y = 10
             item_color = config.red_color
