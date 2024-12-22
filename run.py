@@ -119,6 +119,7 @@ def main():
             for item in ITEMS:
                 item.move()
                 item.draw(surface)
+                item.collide_paddle(paddle, BALLS, ITEMS)
                 
 
         pygame.display.update()
