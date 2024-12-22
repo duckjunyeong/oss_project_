@@ -39,7 +39,7 @@ class Block(Basic):
         self.alive = False;
         blocks.remove(self);
 
-        if random.random() < 0.2:
+        if random.random() < 0.9:
             item_pos_x = random.randint(0,config.display_dimension[0])
             item_pos_y = 10
             item_color = config.red_color
@@ -109,3 +109,16 @@ class Item(Basic):
 
     def draw(self, surface):
         pygame.draw.ellipse(surface, self.color, self.rect)
+    
+    def collide_paddle(self, paddle: Paddle, balls: list, items: list):
+        if self.rect.colliderect(paddle.rect):
+            items.remove(self)
+            if self.color == config.red_color:
+                balls.append(
+                    Ball(
+                        (
+                            paddle.rect.centerx,
+                            config.paddle_pos[1] - config.paddle_size[1],
+                        )
+                    )
+                )
